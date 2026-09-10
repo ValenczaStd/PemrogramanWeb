@@ -1,4 +1,9 @@
-h2{
+body {
+    background: lightcyan;
+    color: white;
+}
+
+h2 {
     color: orange;
     font-family: Trebuchet MS;
     text-align: center;
