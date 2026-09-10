@@ -1,5 +1,6 @@
 body {
-    background: lightcyan;
+    background: url('../img/tree1.avif'), url('../img/field1.jpeg');
+    background-repeat: no-repeat, repeat;
     color: white;
 }
 
