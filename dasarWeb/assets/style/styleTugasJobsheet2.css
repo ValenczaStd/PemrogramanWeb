@@ -1,0 +1,80 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #ddd;
+    line-height: 1.65;
+    padding-bottom: 1000px;
+}
+
+/* Container jadi flex */
+.container-satu {
+    width: 800px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+}
+
+/* Sidebar Satu - tampil paling kiri */
+.sidebar-satu {
+    order: 1;
+    flex: 1;
+    background-color: #FFE8CC;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.sidebar-satu h3 {
+    color: #D2691E;
+}
+
+.sidebar-satu ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-satu li {
+    margin-bottom: 8px;
+}
+
+.sidebar-satu a {
+    text-decoration: none;
+    color: #B7410E;
+}
+
+/* Kolom Utama - tengah, paling lebar */
+.kolom-utama {
+    order: 2;
+    flex: 3;
+    background-color: #F5F5F5;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.kolom-utama h2 {
+    color: #333;
+}
+
+.gambar-artikel {
+    width: 100%;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+/* Sidebar Dua - tampil paling kanan */
+.sidebar-dua {
+    order: 3;
+    flex: 1;
+    background-color: #D6EAF8;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.sidebar-dua h3 {
+    color: #1F618D;
+}
