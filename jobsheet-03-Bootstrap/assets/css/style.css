@@ -49,12 +49,12 @@ header nav a {
 
 .navbar-brand,
 .nav-link {
-  color: #fff !important;
+  color: #59bdff !important;
 }
 
 .nav-link:hover,
 .nav-link.active {
-  color: #f5f8fa !important;
+  color: #6470f5 !important;
 }
 
 /* ===== Main Layout ===== */
