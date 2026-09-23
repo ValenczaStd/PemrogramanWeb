@@ -47,7 +47,15 @@ header nav a {
   font-weight: 500;
 }
 
+.navbar-brand,
+.nav-link {
+  color: #fff !important;
+}
 
+.nav-link:hover,
+.nav-link.active {
+  color: #d9e8f5 !important;
+}
 
 /* ===== Main Layout ===== */
 main {
@@ -189,6 +197,11 @@ form button[type="submit"] {
 
 form button[type="submit"]:hover {
   background-color: #164869;
+}
+
+form button[type="submit"]:hover,
+button[type="submit"]:hover {
+  background-color: #2bd10c !important;
 }
 
 /* ===== Footer ===== */
