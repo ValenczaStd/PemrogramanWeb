@@ -54,7 +54,7 @@ header nav a {
 
 .nav-link:hover,
 .nav-link.active {
-  color: #d9e8f5 !important;
+  color: #f5f8fa !important;
 }
 
 /* ===== Main Layout ===== */
@@ -74,32 +74,6 @@ section {
 
 section h2 {
   margin-bottom: 1rem;
-  color: #39ff14;
-}
-
-/* ===== Kartu Statistik (CSS Grid) ===== */
-main section:nth-of-type(2) {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-}
-
-main section:nth-of-type(2) article {
-  background-color: #eef4fa;
-  border-radius: 8px;
-  padding: 1.25rem;
-  text-align: center;
-}
-
-main section:nth-of-type(2) article h3 {
-  font-size: 0.95rem;
-  color: #55677a;
-  margin-bottom: 0.5rem;
-}
-
-main section:nth-of-type(2) article p {
-  font-size: 1.8rem;
-  font-weight: 700;
   color: #39ff14;
 }
 
