@@ -1,0 +1,72 @@
+:root {
+  --simpus-primary: #39ff14;
+  --simpus-primary-dark: #2bd10c;
+  --simpus-on-primary: #1b1b1b;
+  --simpus-stat-bg: #eef4fa;
+
+  --bs-body-bg: #f5f6f8;
+  --bs-body-color: #2b2b2b;
+  --bs-body-font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.text-brand {
+  color: var(--simpus-primary);
+}
+
+.navbar-simpus {
+  background-color: var(--simpus-primary);
+  --bs-navbar-brand-color: var(--simpus-on-primary);
+  --bs-navbar-brand-hover-color: var(--simpus-on-primary);
+  --bs-navbar-color: rgba(0, 0, 0, 0.7);
+  --bs-navbar-hover-color: #000;
+  --bs-navbar-active-color: #000;
+}
+
+.stat-card {
+  background-color: var(--simpus-stat-bg);
+}
+
+.table-brand {
+  --bs-table-bg: var(--simpus-primary);
+  --bs-table-color: var(--simpus-on-primary);
+  --bs-table-border-color: var(--simpus-primary-dark);
+}
+
+.btn-brand {
+  --bs-btn-color: var(--simpus-on-primary);
+  --bs-btn-bg: var(--simpus-primary);
+  --bs-btn-border-color: var(--simpus-primary);
+  --bs-btn-hover-color: var(--simpus-on-primary);
+  --bs-btn-hover-bg: var(--simpus-primary-dark);
+  --bs-btn-hover-border-color: var(--simpus-primary-dark);
+  --bs-btn-active-color: var(--simpus-on-primary);
+  --bs-btn-active-bg: var(--simpus-primary-dark);
+  --bs-btn-active-border-color: var(--simpus-primary-dark);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--simpus-primary-dark);
+  box-shadow: 0 0 0 0.25rem rgba(57, 255, 20, 0.25);
+}
+
+/* ===== Jobsheet 5: Pesan Error Validasi ===== */
+.error {
+  display: block;
+  color: #d9534f;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}
+
+/* ===== Jobsheet 5: Kolom Pencarian ===== */
+.search-box {
+  margin-bottom: 1rem;
+}
+
+.search-box input {
+  width: 100%;
+  max-width: 320px;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #cdd4da;
+  border-radius: 4px;
+}
