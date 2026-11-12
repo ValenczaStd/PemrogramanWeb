@@ -7,6 +7,6 @@ return [
     'db_host' => getenv('host') ?: 'localhost',
     'db_port' => getenv('port') ?: '5432',
     'db_name' => getenv('database') ?: 'simpus_mini',
-    'db_user' => getenv('username') ?: 'postgres',
+    'db_user' => getenv('user') ?: 'postgres',
     'db_pass' => getenv('password') ?: 'postgres',
 ];
