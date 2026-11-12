@@ -1,9 +1,10 @@
 <?php
 /**
  * SIMPUS-Mini database configuration.
- * Reads EthioDeploy variables: HOST, PORT, DATABASE, USER, PASSWORD.
- * Also supports DB_HOST, DB_PORT, DB_DATABASE, DB_USERNAME, DB_PASSWORD
- * and a local .env file with lowercase keys.
+ *
+ * Prefer DB_* variables to avoid collisions with hosting variables such as PORT.
+ * Supports EthioDeploy's HOST / DATABASE / USER / PASSWORD names as fallbacks.
+ * For local development, supports lowercase keys in the project-root .env file.
  */
 
 $envFile = dirname(__DIR__) . '/.env';
@@ -16,8 +17,11 @@ if (is_file($envFile) && is_readable($envFile)) {
     }
 }
 
-$getValue = static function (array $serverKeys, string $fileKey, string $default = '') use ($envData): string {
-    // Prefer environment variables provided by the hosting platform.
+$getValue = static function (
+    array $serverKeys,
+    string $fileKey,
+    string $default = ''
+) use ($envData): string {
     foreach ($serverKeys as $key) {
         $value = getenv($key);
         if ($value !== false && $value !== '') {
@@ -33,7 +37,6 @@ $getValue = static function (array $serverKeys, string $fileKey, string $default
         }
     }
 
-    // Fallback to local .env file.
     if (isset($envData[$fileKey]) && $envData[$fileKey] !== '') {
         return trim((string) $envData[$fileKey]);
     }
@@ -42,9 +45,13 @@ $getValue = static function (array $serverKeys, string $fileKey, string $default
 };
 
 return [
-    'db_host' => $getValue(['HOST', 'DB_HOST'], 'host', 'localhost'),
-    'db_port' => $getValue(['PORT', 'DB_PORT'], 'port', '5432'),
-    'db_name' => $getValue(['DATABASE', 'DB_DATABASE'], 'database', 'simpus_mini'),
-    'db_user' => $getValue(['USER', 'DB_USERNAME'], 'user', 'postgres'),
-    'db_pass' => $getValue(['PASSWORD', 'DB_PASSWORD'], 'password', ''),
+    // Prefer explicit DB_* variables. HOST is supported as hosting fallback.
+    'db_host' => $getValue(['DB_HOST', 'HOST'], 'host', 'localhost'),
+
+    // IMPORTANT: Never read generic PORT; hosting platforms commonly use PORT=3000.
+    'db_port' => $getValue(['DB_PORT'], 'port', '5432'),
+
+    'db_name' => $getValue(['DB_DATABASE', 'DATABASE'], 'database', 'simpus_mini'),
+    'db_user' => $getValue(['DB_USERNAME', 'USER'], 'user', 'postgres'),
+    'db_pass' => $getValue(['DB_PASSWORD', 'PASSWORD'], 'password', ''),
 ];
