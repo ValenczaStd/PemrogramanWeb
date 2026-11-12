@@ -31,7 +31,7 @@ if (isset($_GET['q'])) {
 // ==========================
 // REDIRECT TO SIMPUS-MINI
 // ==========================
-header('Location: /simpus-mini/');
+header('Location: /jobsheet-10/');
 exit;
 ?>
 
