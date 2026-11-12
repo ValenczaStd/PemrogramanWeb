@@ -2,7 +2,11 @@
 // ==========================
 // BASIC ENV DETECTION
 // ==========================
-$isLocal = in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1'], true);
+$isLocal = in_array(
+    $_SERVER['REMOTE_ADDR'] ?? '',
+    ['127.0.0.1', '::1'],
+    true
+);
 
 // ==========================
 // QUERY HANDLING (SAFE)
@@ -10,10 +14,7 @@ $isLocal = in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1', '::1'], true);
 if (isset($_GET['q'])) {
     $query = $_GET['q'];
 
-    // Allow-list approach
     if ($query === 'info') {
-
-        // phpinfo allowed ONLY on localhost
         if ($isLocal) {
             phpinfo();
             exit;
@@ -23,10 +24,15 @@ if (isset($_GET['q'])) {
         exit('Forbidden! phpinfo allowed ONLY on localhost');
     }
 
-    // Unknown query
     http_response_code(404);
     exit('Invalid query parameter.');
 }
+
+// ==========================
+// REDIRECT TO SIMPUS-MINI
+// ==========================
+header('Location: /simpus-mini/');
+exit;
 ?>
 
 <!DOCTYPE html>

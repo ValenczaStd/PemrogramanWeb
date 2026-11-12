@@ -1,0 +1,1 @@
+ALTER TABLE buku ADD harga DECIMAL(10,2);
