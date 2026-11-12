@@ -1,23 +1,11 @@
 <?php
 require __DIR__ . '/../includes/auth.php';
-require __DIR__ . '/../includes/csrf.php';
+?>
+<?php
 require __DIR__ . '/../includes/koneksi.php';
-
-// Sengaja hanya menerima POST (bukan GET) agar penghapusan tidak bisa
-// dipicu tanpa sengaja lewat link/preview crawler.
-if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: list.php');
-    exit;
-}
-
-csrf_verify();
-
-$id = $_POST['id'] ?? null;
-if ($id) {
-    $stmt = $pdo->prepare("DELETE FROM buku WHERE id = :id");
-    $stmt->execute(['id' => $id]);
-    $_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Buku berhasil dihapus.'];
-}
-
-header('Location: list.php');
-exit;
+if($_SERVER['REQUEST_METHOD']!=='POST'){header('Location: list.php');exit;}
+$id=(int)($_POST['id']??0);if($id<=0){$_SESSION['flash']=['type'=>'error','pesan'=>'ID buku tidak valid.'];header('Location: list.php');exit;}
+$stmt=$pdo->prepare('DELETE FROM buku WHERE id=:id');$stmt->execute(['id'=>$id]);
+if($stmt->rowCount()>0){$_SESSION['flash']=['type'=>'success','pesan'=>'Buku berhasil dihapus.'];}else{$_SESSION['flash']=['type'=>'error','pesan'=>'Data buku tidak ditemukan.'];}
+header('Location: list.php');exit;
+?>

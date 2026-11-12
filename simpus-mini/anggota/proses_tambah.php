@@ -1,20 +1,22 @@
 <?php
 require __DIR__ . '/../includes/auth.php';
-require __DIR__ . '/../includes/csrf.php';
+?>
+<?php
+
 require __DIR__ . '/../includes/koneksi.php';
 
-csrf_verify();
 
 $nama = trim($_POST['nama'] ?? '');
-$noAnggota = trim($_POST['no_anggota'] ?? '');
+$no_anggota = trim($_POST['no_anggota'] ?? '');
 $alamat = trim($_POST['alamat'] ?? '');
-$noHp = trim($_POST['no_hp'] ?? '');
+$no_hp = trim($_POST['no_hp'] ?? '');
 
 $errors = [];
+
 if ($nama === '') {
     $errors[] = "Nama wajib diisi.";
 }
-if ($noAnggota === '') {
+if ($no_anggota === '') {
     $errors[] = "No. Anggota wajib diisi.";
 }
 
@@ -24,16 +26,23 @@ if (!empty($errors)) {
     exit;
 }
 
+if (!isset($_SESSION['anggota'])) {
+    $_SESSION['anggota'] = [];
+}
+
 $stmt = $pdo->prepare(
-    "INSERT INTO anggota (nama, no_anggota, alamat, no_hp)
-     VALUES (:nama, :no_anggota, :alamat, :no_hp)
-     RETURNING id"
+    "INSERT INTO anggota
+    (nama, no_anggota, alamat, no_hp)
+    VALUES
+    (:nama, :no_anggota, :alamat, :no_hp)
+    RETURNING id"
 );
+
 $stmt->execute([
     'nama' => $nama,
-    'no_anggota' => $noAnggota,
+    'no_anggota' => $no_anggota,
     'alamat' => $alamat,
-    'no_hp' => $noHp,
+    'no_hp' => $no_hp,
 ]);
 
 $_SESSION['flash'] = ['type' => 'success', 'pesan' => 'Anggota berhasil ditambahkan.'];

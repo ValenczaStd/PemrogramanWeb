@@ -2,53 +2,68 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-require_once __DIR__ . '/helpers.php';
-require_once __DIR__ . '/csrf.php';
-$sudahLogin = isset($_SESSION['user_id']);
-
-// Prefix relatif ke root proyek ini (bukan root domain) — supaya
-// /assets, /index.php, dst tetap benar walau proyek diakses lewat
-// subfolder (mis. dp2026.test/kode-praktikum/jobsheet-13/), bukan cuma
-// lewat vhost yang document root-nya langsung folder ini.
 $__jobsheetRoot = dirname(__DIR__);
 $__scriptDir = dirname($_SERVER['SCRIPT_FILENAME']);
 $__rel = ltrim(str_replace('\\', '/', substr($__scriptDir, strlen($__jobsheetRoot))), '/');
 $base = $__rel === '' ? '' : str_repeat('../', substr_count($__rel, '/') + 1);
 ?>
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>SIMPUS-Mini<?php echo isset($page_title) ? ' | ' . $page_title : ''; ?></title>
-    <link rel="stylesheet" href="<?php echo $base; ?>assets/css/style.css">
-</head>
-<body>
-    <header>
-        <h1>SIMPUS-Mini</h1>
-        <button type="button" id="nav-toggle-btn" class="nav-toggle-label" aria-label="Menu">&#9776;</button>
-        <nav>
-            <ul>
-                <li><a href="<?php echo $base; ?>index.php">Beranda</a></li>
-                <li><a href="<?php echo $base; ?>buku/list.php">Daftar Buku</a></li>
-                <?php if ($sudahLogin): ?>
-                <li><a href="<?php echo $base; ?>buku/tambah.php">Tambah Buku</a></li>
-                <li><a href="<?php echo $base; ?>anggota/list.php">Daftar Anggota</a></li>
-                <li><a href="<?php echo $base; ?>anggota/tambah.php">Tambah Anggota</a></li>
-                <li><a href="<?php echo $base; ?>peminjaman/tambah.php">Peminjaman Baru</a></li>
-                <li><a href="<?php echo $base; ?>peminjaman/kembali.php">Pengembalian</a></li>
-                <li><a href="<?php echo $base; ?>peminjaman/riwayat.php">Riwayat</a></li>
-                <?php endif; ?>
-            </ul>
-        </nav>
-        <div class="auth-status">
-            <?php if ($sudahLogin): ?>
-                <span><?php echo e($_SESSION['nama']); ?></span>
-                <a href="<?php echo $base; ?>auth/logout.php">Logout</a>
-            <?php else: ?>
-                <a href="<?php echo $base; ?>auth/login.php">Login</a>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="<?php echo $base; ?>assets/css/style.css" />
+  </head>
+  <body>
+    <header class="navbar navbar-expand-lg navbar-simpus">
+      <div class="container">
+        <a class="navbar-brand fw-semibold" href="<?php echo $base; ?>index.php">SIMPUS-Mini</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navMenu"
+          aria-controls="navMenu"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <nav class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo $base; ?>index.php">Beranda</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo $base; ?>buku/list.php">Daftar Buku</a>
+            </li>
+            <?php if (!empty($_SESSION['user_id'])): ?>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo $base; ?>buku/tambah.php">Tambah Buku</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo $base; ?>anggota/list.php">Daftar Anggota</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="<?php echo $base; ?>anggota/tambah.php">Tambah Anggota</a>
+            </li>
             <?php endif; ?>
-        </div>
+          </ul>
+          <div class="d-flex align-items-center gap-3 ms-lg-3 mt-3 mt-lg-0">
+            <?php if (!empty($_SESSION['user_id'])): ?>
+              <span class="text-white small"><?php echo htmlspecialchars($_SESSION['nama'] ?? 'Petugas', ENT_QUOTES, 'UTF-8'); ?></span>
+              <a class="auth-status" href="<?php echo $base; ?>auth/logout.php">Logout</a>
+            <?php else: ?>
+              <a class="auth-status" href="<?php echo $base; ?>auth/login.php">Login</a>
+            <?php endif; ?>
+          </div>
+        </nav>
+      </div>
     </header>
 
-    <main>
+    <main class="container my-4">

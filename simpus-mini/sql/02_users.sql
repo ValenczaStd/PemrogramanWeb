@@ -1,6 +1,4 @@
--- Jobsheet 10: tabel users (Petugas) untuk autentikasi
--- Jalankan: psql -d simpus_mini -f sql/02_users.sql
-
+-- Jobsheet 10: tabel akun petugas untuk autentikasi
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     nama VARCHAR(255) NOT NULL,
