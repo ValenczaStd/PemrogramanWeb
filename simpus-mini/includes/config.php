@@ -4,9 +4,9 @@
 // variable (getenv) yang diatur di server, JANGAN di-commit ke repository
 // bila nilai default di bawah sudah diganti dengan kredensial asli.
 return [
-    'db_host' => getenv('host') ?: 'localhost',
-    'db_port' => getenv('port') ?: '5432',
-    'db_name' => getenv('database') ?: 'simpus_mini',
-    'db_user' => getenv('user') ?: 'postgres',
-    'db_pass' => getenv('password') ?: 'postgres',
+    'db_host' => getenv('DB_HOST') ?: 'localhost',
+    'db_port' => getenv('DB_PORT') ?: '5432',
+    'db_name' => getenv('DB_DATABASE') ?: 'simpus_mini',
+    'db_user' => getenv('DB_USERNAME') ?: 'postgres',
+    'db_pass' => getenv('DB_PASSWORD') ?: 'postgres',
 ];
