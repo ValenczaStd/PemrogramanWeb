@@ -1,9 +1,6 @@
 <?php
 $config = require __DIR__ . '/config.php';
 
-echo "Host terbaca: " . htmlspecialchars($config['db_host']);
-exit;
-
 try {
     $pdo = new PDO(
         "pgsql:host={$config['db_host']};port={$config['db_port']};dbname={$config['db_name']}",
